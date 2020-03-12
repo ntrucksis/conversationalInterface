@@ -245,6 +245,36 @@ def printObject(recipeObject, steps_list, title):
   return
 
 
+def getRecipeData(recipeUrl):
+     # create soup object that represents the input recipe's web page
+    recipeSoup = getRecipeSoup(recipeUrl)
+    # access the recipe's title
+    recipeTitle = recipeSoup.title.string.split('- ')[0]
+    # form list of text where ingredients are written from the web page
+    ingredientsList = getIngredientsList(recipeSoup)
+    # create ingredients objects for each ingredient
+    # ingredients object has fields for name, quantity, measurement, preparation, description
+    ingredients = getIngredientsObject(ingredientsList)
+    # get list of words from recipe directions
+    directionsList = getDirections(recipeSoup)
+    # get tools from directionsList
+    tools = getTools(directionsList)
+    # get primary cooking methods from direcions list
+    primaryMethods = getPrimaryMethods(directionsList)
+    # get secondary cooking methods from directions list
+    secondaryMethods = getSecondaryMethods(directionsList)
+    # get steps from list of directions
+    steps = getSteps(directionsList)
+    # initialize dicitonary that will hold all individual ingredient dictionaries
+    ingredDict = {}
+    # assign number to each ingredient dictionary and add them to wrapper dictionary
+    for i in range(len(ingredients)):
+        ingredDict[f'{i}'] = ingredients[i]
+    # create large dictionary that holds all ingredients, tools, primary and secondary cooking methdos
+    recipeObj = {**ingredDict , **tools , **primaryMethods , **secondaryMethods}
+
+    return recipeTitle, recipeObj
+
 def main(recipeUrl):
     # create soup object that represents the input recipe's web page
     recipeSoup = getRecipeSoup(recipeUrl)

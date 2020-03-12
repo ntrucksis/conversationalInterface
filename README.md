@@ -1,4 +1,4 @@
-# Recipes
+# Conversational Recipe Interface
 
 To run the project, please install the following python packages with the command:
 
@@ -10,11 +10,7 @@ Optionally, you can create a virtual environment to hold all the required packag
 - $ `source env/bin/activate`
 - $ `pip install -r requirements.txt`
 
-# HTML Parser
-
-This project runs on the default python parser `html`.  Functionality is not guaranteed with other html parsers.
 
 ## Running the Project
 
-Run the file `python recipeParser.py` and when prompted, provide the program a URL from allrecipes.com
-
+Run the file `python interface.py` and when prompted, respond to the interface, typing as if you were speaking normally
