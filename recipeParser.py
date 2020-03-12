@@ -271,7 +271,10 @@ def getRecipeData(recipeUrl):
     for i in range(len(ingredients)):
         ingredDict[f'{i}'] = ingredients[i]
     # create large dictionary that holds all ingredients, tools, primary and secondary cooking methdos
-    recipeObj = {**ingredDict , **tools , **primaryMethods , **secondaryMethods}
+    recipeObj = {
+        "title": recipeTitle,
+        "ingredients": {**ingredDict, **tools, **primaryMethods, **secondaryMethods},
+        "steps": steps}   
 
     return recipeTitle, recipeObj
 
@@ -301,7 +304,7 @@ def main(recipeUrl):
     for i in range(len(ingredients)):
         ingredDict[f'{i}'] = ingredients[i]
     # create large dictionary that holds all ingredients, tools, primary and secondary cooking methdos
-    recipeObj = {**ingredDict , **tools , **primaryMethods , **secondaryMethods}
+    recipeObj = {**ingredDict, **tools, **primaryMethods, **secondaryMethods} 
 
     print(f'\nRecipe Title: {recipeTitle}\n')
 
