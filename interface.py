@@ -2,6 +2,22 @@
 from recipeParser import getRecipeData
 import re
 
+def google_query(qstr):
+  searchstr = "https://www.google.com/search?q="
+  searchtokens = qstr.split()
+  for token in searchtokens:
+    searchstr = searchstr + token + '+'
+  searchstr = searchstr[:-1]
+  return searchstr
+
+def youtube_query(qstr):
+  searchstr = "https://www.youtube.com/results?search_query="
+  searchtokens = qstr.split()
+  for token in searchtokens:
+    searchstr = searchstr + token + '+'
+  searchstr = searchstr[:-1]
+  return searchstr
+
 def main(recipeUrl):
 	
 	title, recipeObj = getRecipeData(recipeUrl)
