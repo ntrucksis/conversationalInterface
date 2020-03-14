@@ -1,6 +1,7 @@
 # main file to be run when interacting with the conversational interface
 from recipeParser import getRecipeData
 import re
+from sizetransform import checkIsInt
 
 def google_query(qstr):
   searchstr = "https://www.google.com/search?q="
@@ -17,6 +18,25 @@ def youtube_query(qstr):
     searchstr = searchstr + token + '+'
   searchstr = searchstr[:-1]
   return searchstr
+
+def viewIngredients(recipe):
+    items = recipe["ingredients"]
+    notIngredients = items["tools"] + items["primaryMethods"] + items["secondaryMethods"]
+    del items["tools"]
+    del items["primaryMethods"]
+    del items["secondaryMethods"]
+    
+    i = 1
+    print('\n')
+    for k in items:
+        print (f'Ingredient #{i}')
+        print (f'Name: {items[k]["name"]}')
+        print (f'Quantity: {items[k]["quantity"]}')
+        print (f'Measurement: {items[k]["measurement"]}')
+        print (f'Preparation: {items[k]["preparation"]}')
+        print (f'Descriptors: {items[k]["descriptors"]}')
+        print ('\n')
+        i += 1
 
 def main(recipeUrl):
 	
@@ -38,10 +58,11 @@ def main(recipeUrl):
 		if choice == '1':
 			print ('Yeah, lets go over the ingredients')
 			asking = False
-			# call function for going over ing here
+			viewIngredients(recipeObj)
+            # call function for going over ing here
 		elif choice == '2':
 			print ('Sure, let\'s begin with the recipe steps')
-			asking = False
+			asking = False            
 			# call function for steps here
 			# remember to increment current_step
 		else:
