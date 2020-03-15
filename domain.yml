@@ -31,6 +31,23 @@ responses:
   utter_getURL:
   - text: "Sure. Please specify a URL."
 
+  utter_ask_url:
+  - text: "Sure. Please specify a URL."
+  
+  utter_ask_ingredientsorsteps:
+  - text: "[1] Go over ingredients list or [2] Go over recipe steps."
+  
+slots:
+  url:
+    type: unfeaturized
+  ingredientsorsteps:
+    type: unfeaturized
+    
+forms:
+  - ActionRecipeDialog  
+actions:
+      
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

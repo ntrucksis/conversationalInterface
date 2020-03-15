@@ -32,5 +32,5 @@
 
 ## recipe request
 * show_recipe
-   - utter_getURL
+   - ActionRecipeDialog
    

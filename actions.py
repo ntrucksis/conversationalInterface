@@ -25,17 +25,41 @@
 #         dispatcher.utter_message(text="Hello World!")
 #
 #         return []
-import rasa_sdk
+
 from rasa_sdk import Action
 from rasa_sdk.events import SlotSet
 
+class ActionRecipeDialog(Action):
+   def name(self) -> Text:
+      return "action_recipe_dialog"
+   
+   @staticmethod
+   def required_slots(tracker):
+      return [
+         "url",
+         "ingredientsorsteps"
+         ]	  
+   
+   def submit(
+      self,
+      dispatcher: CollectingDispatcher,
+      tracker: Tracker,
+      domain: Dict[Text, Any]): #-> List[Dict]:
+         #check what to return?
+         return []		
+
+
+	  
 class ActionAskYouTube(Action):
-   def name(self): #-> Text:
+   def name(self) -> Text:
       return "action_ask_youtube"
 
-   #def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]): -> List[Dict[Text, Any]]:
-   def run(self, dispatcher, tracker, domain):
-      user_q = tracker.get_slot('question')
-      #result = getanswersfromyoutube(user_q)
-      
-      return [SlotSet("matches", result if result is not None else [])]
+   def run(
+      self,
+      dispatcher: CollectingDispatcher,
+      tracker: Tracker,
+      domain: Dict[Text, Any]): #-> List[Dict[Text, Any]]:
+         user_q = tracker.get_slot('question')
+         result=getanswersfromyoutube(user_q)
+         
+         return [SlotSet("matches", result if result is not None else [])]
